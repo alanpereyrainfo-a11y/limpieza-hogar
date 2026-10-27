@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import { duePhrase, formatLongDate } from "../domain/dates.ts";
+import { duePhrase, formatLongDate, sentenceCase } from "../domain/dates.ts";
 import { useStore } from "../state/store.tsx";
 
 export function HechoView() {
@@ -42,7 +42,7 @@ export function HechoView() {
         <div className="space-y-5">
           {[...groups.entries()].map(([date, items]) => (
             <section key={date}>
-              <h2 className="mb-2 text-sm font-semibold text-cyan capitalize">
+              <h2 className="mb-2 text-sm font-semibold text-cyan">
                 {date === today ? "Hoy" : formatLongDate(date)}
                 {date !== today ? ` · ${duePhrase(date, today)}` : ""}
               </h2>
@@ -50,7 +50,7 @@ export function HechoView() {
                 {items.map((item) => (
                   <li key={item.id} className="flex items-center justify-between gap-3 px-4 py-3">
                     <div className="min-w-0">
-                      <p className="truncate font-medium capitalize">{item.taskName}</p>
+                      <p className="truncate font-medium">{sentenceCase(item.taskName)}</p>
                       <p className="text-xs text-muted">
                         {item.zoneName}
                         {item.onTime ? "" : " · tarde"}

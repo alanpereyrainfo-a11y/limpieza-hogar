@@ -49,9 +49,13 @@ export function Shell() {
   const [postponeTask, setPostponeTask] = useState<Task | null>(null);
 
   useEffect(() => {
-    const onHash = () => setView(readHash());
-    window.addEventListener("hashchange", onHash);
-    return () => window.removeEventListener("hashchange", onHash);
+    const sync = () => setView(readHash());
+    window.addEventListener("hashchange", sync);
+    window.addEventListener("popstate", sync);
+    return () => {
+      window.removeEventListener("hashchange", sync);
+      window.removeEventListener("popstate", sync);
+    };
   }, []);
 
   useEffect(() => {
@@ -63,7 +67,7 @@ export function Shell() {
     setFocusZoneId(zoneId ?? null);
     const hash = `#/${next}`;
     if (window.location.hash !== hash) {
-      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${hash}`);
+      window.history.pushState(null, "", `${window.location.pathname}${window.location.search}${hash}`);
     }
   }
 

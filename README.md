@@ -16,6 +16,7 @@ Cuando el repositorio esté publicado con GitHub Pages, va a estar en:
 - **Sugerencias**: tareas para agrupar, zonas atrasadas y tips de limpieza.
 - Zonas y tareas se crean, editan y borran.
 - Mapi, un mapache propio en SVG, reacciona si vas al día, si hay vencidas o si venís posponiendo.
+- El ícono (favicon, Apple, PWA 192 y 512, y maskable) es Mapi limpiando, con spray, burbujas y brillos.
 - PWA instalable, modo oscuro, y respaldo en JSON.
 
 La primera vez carga la casa de ejemplo: habitación, estudio, living, cocina, comedor, toilet, baño principal, quincho, patio, jardín, lavadero, depósito y Uvita.
@@ -51,6 +52,42 @@ npm run preview
 ```
 
 El build usa la base `/limpieza-hogar/` para GitHub Pages. Los íconos de Mapi se regeneran con `npm run icons`.
+
+## Capturas
+
+El ícono de la app es Mapi con el spray. El de 512 es el que usa la PWA; el maskable deja aire alrededor para que el recorte del sistema no se coma las orejas ni las burbujas.
+
+![Ícono de Mapi limpiando](docs/capturas/icono-512.png)
+
+![Ícono maskable](docs/capturas/icono-maskable-512.png)
+
+Hoy, en el celular (390 px) y en el escritorio.
+
+![Hoy en el celular](docs/capturas/hoy-390.png)
+
+![Hoy en el escritorio](docs/capturas/hoy-1440.png)
+
+Posponer muestra los días, la suciedad y si se corta la racha.
+
+![Posponer una tarea](docs/capturas/posponer-390.png)
+
+Al marcarla hecha suma puntos y se puede deshacer.
+
+![Tarea hecha](docs/capturas/hecho-toast-390.png)
+
+Próximas, historial, zonas, plan y sugerencias.
+
+![Próximas](docs/capturas/proximas-390.png)
+
+![Hecho](docs/capturas/hecho-390.png)
+
+![Zonas](docs/capturas/zonas-390.png)
+
+![Plan semanal](docs/capturas/plan-390.png)
+
+![Sugerencias](docs/capturas/sugerencias-390.png)
+
+En `docs/capturas/` también están las mismas vistas a 1440 px.
 
 ## Datos
 

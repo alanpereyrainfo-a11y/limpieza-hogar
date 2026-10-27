@@ -1,4 +1,4 @@
-import { duePhrase, formatMinutes, nextWeekday } from "../domain/dates.ts";
+import { duePhrase, formatMinutes, nextWeekday, sentenceCase } from "../domain/dates.ts";
 import { MAX_DEEP_MINUTES, PLAN_DAYS } from "../domain/plan.ts";
 import { deepMinutesOn } from "../domain/schedule.ts";
 import type { Task } from "../domain/types.ts";
@@ -27,8 +27,8 @@ export function PlanView({ onEdit }: { onEdit: (task: Task) => void }) {
         <ul className="mt-3 space-y-2">
           {dailies.map((task) => (
             <li key={task.id}>
-              <button type="button" className="text-sm capitalize hover:text-cyan" onClick={() => onEdit(task)}>
-                {task.name}
+              <button type="button" className="text-sm hover:text-cyan" onClick={() => onEdit(task)}>
+                {sentenceCase(task.name)}
                 <span className="ml-2 text-xs text-muted">{formatMinutes(task.durationMin)}</span>
               </button>
             </li>
@@ -52,8 +52,8 @@ export function PlanView({ onEdit }: { onEdit: (task: Task) => void }) {
                   <p className="mt-1 text-xs text-muted">{day.detail}</p>
                 </div>
                 <p className={`text-right text-xs font-semibold ${heavy ? "text-amber" : "text-muted"}`}>
-                  {formatMinutes(load)}
-                  <span className="block font-normal">el {duePhrase(date, today)}</span>
+                  {load} min
+                  <span className="block font-normal">fondo {duePhrase(date, today)}</span>
                 </p>
               </div>
               {heavy && (
@@ -63,10 +63,11 @@ export function PlanView({ onEdit }: { onEdit: (task: Task) => void }) {
                 {tasks.length === 0 && <li className="text-sm text-muted">Nada fijo este día.</li>}
                 {tasks.map((task) => (
                   <li key={task.id} className="flex items-center justify-between gap-2">
-                    <button type="button" className="min-w-0 truncate text-left text-sm capitalize hover:text-cyan" onClick={() => onEdit(task)}>
-                      {task.name}
+                    <button type="button" className="min-w-0 truncate text-left text-sm hover:text-cyan" onClick={() => onEdit(task)}>
+                      {sentenceCase(task.name)}
                       <span className="ml-2 text-xs text-muted">
                         {formatMinutes(task.durationMin)} · cada {task.frequencyDays} días
+                        {task.nextDue !== date ? ` · ${duePhrase(task.nextDue, today)}` : ""}
                       </span>
                     </button>
                     <select

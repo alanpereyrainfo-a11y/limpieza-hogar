@@ -7,6 +7,7 @@ import {
   greetingForHour,
   isArgentineSummer,
   isIsoDate,
+  formatLongDate,
   nextWeekday,
   todayIso,
 } from "./dates.ts";
@@ -52,6 +53,10 @@ describe("fechas", () => {
     expect(formatMinutes(45)).toBe("45 min");
     expect(formatMinutes(60)).toBe("1 h");
     expect(formatMinutes(75)).toBe("1 h 15 min");
+  });
+
+  it("escribe la fecha en minúsculas rioplatenses", () => {
+    expect(formatLongDate("2026-10-27")).toBe("Martes, 27 de octubre");
   });
 
   it("encuentra el próximo día de la semana", () => {

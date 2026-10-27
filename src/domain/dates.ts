@@ -70,21 +70,39 @@ export function duePhrase(due: string, today: string): string {
   return `hace ${-delta} días`;
 }
 
+const WEEKDAYS = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+const MONTHS = [
+  "enero",
+  "febrero",
+  "marzo",
+  "abril",
+  "mayo",
+  "junio",
+  "julio",
+  "agosto",
+  "septiembre",
+  "octubre",
+  "noviembre",
+  "diciembre",
+];
+
+export function sentenceCase(value: string): string {
+  if (!value) return value;
+  return value.charAt(0).toLocaleUpperCase("es-AR") + value.slice(1);
+}
+
 export function formatLongDate(iso: string): string {
-  const formatted = new Intl.DateTimeFormat("es-AR", {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-  }).format(parseIsoDate(iso));
-  return formatted.charAt(0).toLocaleUpperCase("es-AR") + formatted.slice(1);
+  const date = parseIsoDate(iso);
+  const weekday = WEEKDAYS[date.getDay()] ?? "";
+  const month = MONTHS[date.getMonth()] ?? "";
+  return `${sentenceCase(weekday)}, ${date.getDate()} de ${month}`;
 }
 
 export function formatShortDate(iso: string): string {
-  return new Intl.DateTimeFormat("es-AR", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-  }).format(parseIsoDate(iso));
+  const date = parseIsoDate(iso);
+  const short = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"][date.getDay()] ?? "";
+  const month = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"][date.getMonth()] ?? "";
+  return `${short} ${date.getDate()} ${month}`;
 }
 
 export function greetingForHour(hour: number): string {

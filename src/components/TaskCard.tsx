@@ -1,6 +1,6 @@
 import { Check, Clock, Pencil } from "lucide-react";
 import type { ReactNode } from "react";
-import { duePhrase, formatMinutes } from "../domain/dates.ts";
+import { duePhrase, formatMinutes, sentenceCase } from "../domain/dates.ts";
 import { isPostponeBlocked, isUrgent } from "../domain/postpone.ts";
 import { priorityLabel } from "../domain/scoring.ts";
 import type { Task, Zone } from "../domain/types.ts";
@@ -36,7 +36,7 @@ export function TaskCard({
         </span>
         <div className="min-w-0 flex-1">
           <div className="flex items-start justify-between gap-2">
-            <h3 className="text-base leading-tight font-semibold capitalize">{task.name}</h3>
+            <h3 className="text-base leading-tight font-semibold">{sentenceCase(task.name)}</h3>
             <button
               type="button"
               onClick={onEdit}

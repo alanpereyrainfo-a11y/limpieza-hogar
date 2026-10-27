@@ -36,7 +36,8 @@ export function HoyView({
   const done = data.completions.filter((item) => item.date === today).length;
   const total = done + pending.length;
   const ratio = total === 0 ? 1 : done / total;
-  const minutes = pending.reduce((sum, task) => sum + task.durationMin, 0);
+  const routine = pending.filter((task) => task.frequencyDays <= 1).reduce((sum, task) => sum + task.durationMin, 0);
+  const deep = pending.filter((task) => task.frequencyDays > 1).reduce((sum, task) => sum + task.durationMin, 0);
   const mood = mapiMood(data.tasks, today);
   const [hour] = useState(() => new Date().getHours());
 
@@ -46,7 +47,7 @@ export function HoyView({
         <h1 className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">
           {greetingForHour(hour)}, Alan
         </h1>
-        <p className="mt-1 text-sm text-muted capitalize">{formatLongDate(today)}</p>
+        <p className="mt-1 text-sm text-muted">{formatLongDate(today)}</p>
       </div>
 
       <section className="rim rounded-[28px] p-4 md:p-5">
@@ -56,7 +57,9 @@ export function HoyView({
             <p className="text-xs font-semibold tracking-[0.16em] text-cyan uppercase">Mapi</p>
             <p className="mt-1 text-sm leading-relaxed text-ink md:text-base">{mapiLine(mood, overdue.length, data.streak)}</p>
             <p className="mt-3 text-sm text-muted">
-              {total === 0 ? "Nada pendiente" : `${done} de ${total} hechas · ${formatMinutes(minutes)} por delante`}
+              {total === 0
+                ? "Nada pendiente"
+                : `${done} de ${total} hechas · ${formatMinutes(routine)} de rutina y ${formatMinutes(deep)} de fondo`}
             </p>
             <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/10">
               <motion.div

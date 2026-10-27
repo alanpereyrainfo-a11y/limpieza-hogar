@@ -23,11 +23,12 @@ async function png(svg, size, filename) {
 }
 
 const any = source;
-const maskable = scaled(source, 0.8);
+const apple = scaled(source, 0.9);
+const maskable = scaled(source, 0.78);
 
 await writeFile(new URL("../public/favicon.svg", import.meta.url), any);
 await png(any, 32, "icons/favicon-32.png");
-await png(any, 180, "icons/apple-touch-icon.png");
+await png(apple, 180, "icons/apple-touch-icon.png");
 await png(any, 192, "icons/icon-192.png");
 await png(any, 512, "icons/icon-512.png");
 await png(maskable, 192, "icons/maskable-192.png");

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { formatLongDate } from "../domain/dates.ts";
+import { formatLongDate, sentenceCase } from "../domain/dates.ts";
 import { applyPostpone, postponeOptions } from "../domain/postpone.ts";
 import type { Task } from "../domain/types.ts";
 import { Mapi } from "./Mapi.tsx";
@@ -28,7 +28,7 @@ export function PostponeDialog({
           <>
             <DialogHeader>
               <DialogTitle>Posponer</DialogTitle>
-              <DialogDescription className="capitalize">«{task.name}»</DialogDescription>
+              <DialogDescription>«{sentenceCase(task.name)}»</DialogDescription>
             </DialogHeader>
             <div className="flex items-center gap-3">
               <Mapi mood="sucio" className="h-24 w-24 shrink-0" />

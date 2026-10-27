@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Pencil, Plus } from "lucide-react";
-import { duePhrase, formatMinutes } from "../domain/dates.ts";
+import { duePhrase, formatMinutes, sentenceCase } from "../domain/dates.ts";
 import { zoneCleanliness } from "../domain/cleanliness.ts";
 import { cleanlinessLabel } from "../domain/scoring.ts";
 import type { Task, Zone } from "../domain/types.ts";
@@ -83,8 +83,8 @@ export function ZonasView({
                 <ul className={`mt-3 space-y-2 ${open ? "" : "max-h-40 overflow-hidden"}`}>
                   {tasks.map((task) => (
                     <li key={task.id} className="flex items-center justify-between gap-2 text-sm">
-                      <button type="button" className="min-w-0 truncate text-left capitalize hover:text-cyan" onClick={() => onEditTask(task)}>
-                        {task.name}
+                      <button type="button" className="min-w-0 truncate text-left hover:text-cyan" onClick={() => onEditTask(task)}>
+                        {sentenceCase(task.name)}
                       </button>
                       <span className="shrink-0 text-xs text-muted">
                         {formatMinutes(task.durationMin)} · {duePhrase(task.nextDue, today)}

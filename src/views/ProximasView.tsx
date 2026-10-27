@@ -43,7 +43,7 @@ export function ProximasView({
         <div className="space-y-6">
           {[...groups.entries()].map(([date, tasks]) => (
             <section key={date} className="space-y-3">
-              <h2 className="text-sm font-semibold text-cyan capitalize">
+              <h2 className="text-sm font-semibold text-cyan">
                 {formatLongDate(date)} · {duePhrase(date, today)}
               </h2>
               {tasks.map((task) => (
